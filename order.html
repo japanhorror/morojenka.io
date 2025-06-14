@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оформление заказа — ИП Мазур</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff0f5;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input, select, textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      padding: 12px;
+      background: hotpink;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: deeppink;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Оформление заказа</h1>
+    <form id="orderForm">
+      <label for="product">Выберите мороженое:</label>
+      <select name="product" id="product" required>
+        <option value="Фисташковое">Фисташковое</option>
+        <option value="Ванильное">Ванильное</option>
+        <option value="Сникерс">Сникерс</option>
+      </select>
+
+      <label for="quantity">Количество (в кг):</label>
+      <input type="number" name="quantity" id="quantity" min="1" placeholder="Например: 10" required>
+
+      <label for="name">Ваше имя:</label>
+      <input type="text" name="name" id="name" required>
+
+      <label for="phone">Телефон:</label>
+      <input type="tel" name="phone" id="phone" placeholder="+7..." required>
+
+      <label for="address">Адрес доставки:</label>
+      <textarea name="address" id="address" rows="3" required></textarea>
+
+      <button type="submit">Отправить заказ</button>
+    </form>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const product = params.get('product');
+    if (product) {
+      const select = document.getElementById('product');
+      for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === product) {
+          select.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    document.getElementById('orderForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      window.location.href = 'thanks.html';
+    });
+  </script>
+</body>
+</html>
